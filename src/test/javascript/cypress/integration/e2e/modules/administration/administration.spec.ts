@@ -1,7 +1,8 @@
 describe('Administration', () => {
   beforeEach(() => {
-    cy.visit('/');
+    cy.logout();
     cy.loginWithAdmin();
+    cy.visit('/');
   });
 
   it('should load user management', () => {

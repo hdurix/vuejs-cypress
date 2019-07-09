@@ -5,6 +5,7 @@ describe('Log In', () => {
   const loginPageTitle = 'login-title';
 
   beforeEach(() => {
+    cy.logout();
     cy.visit('/');
     NavBarPage.getSignInPage();
   });
