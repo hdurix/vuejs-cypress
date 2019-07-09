@@ -1,9 +1,22 @@
-Cypress.Commands.add('getAdminMenuElement', () => cy.get('#admin-menu'));
+const navbarSelector = '[data-e2e-container=navbar]';
+const adminMenuSelector = '[data-e2e-element=admin-menu]';
+const accountMenuSelector = '[data-e2e-element=account-menu]';
+const loginSelector = '[data-e2e-element=login]';
 
 Cypress.Commands.add('clickOnAdminMenuItem', (item: string) => {
   return cy
-    .getAdminMenuElement()
+    .get(navbarSelector)
+    .find(adminMenuSelector)
     .click()
-    .get(`.dropdown-item[href="/admin/${item}"]`)
+    .find(`.dropdown-item[href="/admin/${item}"]`)
+    .click();
+});
+
+Cypress.Commands.add('clickOnLoginItem', () => {
+  return cy
+    .get(navbarSelector)
+    .find(accountMenuSelector)
+    .click()
+    .find(loginSelector)
     .click();
 });

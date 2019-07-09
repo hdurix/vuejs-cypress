@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>
-            <span id="health-page-heading" v-text="$t('health.title')">Health Checks</span>
+            <span id="health-page-heading" v-text="$t('health.title')" data-jhi-e2e-page-heading-value="health">Health Checks</span>
             <button class="btn btn-primary float-right" v-on:click="refresh()" :disabled="updatingHealth">
                 <font-awesome-icon icon="sync"></font-awesome-icon> <span v-text="$t('health[\'refresh.button\']')">Refresh</span>
             </button>
@@ -34,7 +34,7 @@
         </div>
         <b-modal ref="healthModal">
             <h4 slot="modal-title" v-if="currentHealth" class="modal-title" id="showHealthLabel">
-                    <span v-text="$t('health.indicator.' + baseName(currentHealth.name))"/> 
+                    <span v-text="$t('health.indicator.' + baseName(currentHealth.name))"/>
                 {{subSystemName(currentHealth.name)}}
             </h4>
             <health-modal :current-health="currentHealth"></health-modal>

@@ -1,6 +1,6 @@
 <template>
     <div v-if="audits">
-        <h2 id="audits-page-heading" v-text="$t('audits.title')">Audits</h2>
+        <h2 id="audits-page-heading" v-text="$t('audits.title')" data-jhi-e2e-page-heading-value="audits">Audits</h2>
 
         <div class="row">
             <div class="col-md-5">

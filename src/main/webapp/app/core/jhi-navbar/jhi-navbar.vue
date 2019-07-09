@@ -1,5 +1,5 @@
 <template>
-    <b-navbar toggleable="md" type="dark" class="jh-navbar">
+    <b-navbar toggleable="md" type="dark" class="jh-navbar" data-e2e-container="navbar">
         <div class="jh-logo-container float-left">
             <b-navbar-toggle right class="jh-navbar-toggler d-lg-none float-right" href="javascript:void(0);"  data-toggle="collapse" target="header-tabs" aria-expanded="false" aria-label="Toggle navigation">
                 <font-awesome-icon icon="bars" />
@@ -33,7 +33,8 @@
                     v-if="hasAnyAuthority('ROLE_ADMIN')"
                     :class="{'router-link-active': subIsActive('/admin')}"
                     active-class="active"
-                    class="pointer">
+                    class="pointer"
+                    data-e2e-element="admin-menu">
                     <span slot="button-content" class="navbar-dropdown-menu">
                         <font-awesome-icon icon="user-plus" />
                         <span v-text="$t('global.menu.admin.main')">Administration</span>
@@ -87,7 +88,8 @@
                     id="account-menu"
                     :class="{'router-link-active': subIsActive('/account')}"
                     active-class="active"
-                    class="pointer">
+                    class="pointer"
+                    data-e2e-element="account-menu">
                     <span slot="button-content" class="navbar-dropdown-menu">
                         <font-awesome-icon icon="user" />
                         <span v-text="$t('global.menu.account.main')">
@@ -106,7 +108,11 @@
                         <font-awesome-icon icon="sign-out-alt" />
                         <span v-text="$t('global.menu.account.logout')">Sign out</span>
                     </b-dropdown-item>
-                    <b-dropdown-item v-if="!authenticated"  v-on:click="openLogin()" id="login">
+                    <b-dropdown-item
+                        v-if="!authenticated"
+                        v-on:click="openLogin()"
+                        id="login"
+                        data-e2e-element="login">
                         <font-awesome-icon icon="sign-in-alt" />
                         <span v-text="$t('global.menu.account.login')">Sign in</span>
                     </b-dropdown-item>
