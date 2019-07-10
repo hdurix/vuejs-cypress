@@ -51,8 +51,9 @@
     "baseName": "vue",
     "useSass": true,
     "clientPackageManager": "npm",
-    "clientFramework": "vue",
+    "clientFramework": "angularX",
     "clientTheme": "none",
-    "clientThemeVariant": ""
+    "enableTranslation": true,
+    "languages": ["en"]
   }
 }
