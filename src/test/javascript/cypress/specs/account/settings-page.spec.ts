@@ -6,7 +6,7 @@ import {
   settingsSubmitSelector
 } from '../../support/page-objects/settings-page';
 
-describe('Account Management', () => {
+describe('User settings page', () => {
   beforeEach(() => {
     cy.cleanUsers();
     // TODO: Move logout to support ? It would run before each test

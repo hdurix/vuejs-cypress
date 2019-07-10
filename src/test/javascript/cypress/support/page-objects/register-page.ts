@@ -12,7 +12,7 @@ export function autoSignUpUsing(username: string, email: string, password: strin
     .type(username);
   cy.get(registerPageSelector)
     .find(registerEmailSelector)
-    .type(username);
+    .type(email);
   cy.get(registerPageSelector)
     .find(registerPasswordSelector)
     .type(password);
@@ -20,6 +20,6 @@ export function autoSignUpUsing(username: string, email: string, password: strin
     .find(registerConfirmationPasswordSelector)
     .type(password);
   cy.get(registerPageSelector)
-    .find(registerConfirmationPasswordSelector)
+    .find(registerSubmitSelector)
     .click();
 }

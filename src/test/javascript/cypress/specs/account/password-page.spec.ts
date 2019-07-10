@@ -1,6 +1,6 @@
 import { autoChangePassword } from '../../support/page-objects/password-page';
 
-describe('Account Management', () => {
+describe('Password modification page', () => {
   beforeEach(() => {
     cy.cleanUsers();
     // TODO: Move logout to support ? It would run before each test

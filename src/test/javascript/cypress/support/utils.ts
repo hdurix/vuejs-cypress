@@ -14,7 +14,7 @@ Cypress.Commands.add(
 
 Cypress.Commands.add('getSuccessToast', () => cy.get('div[role=alert].alert.alert-success'));
 Cypress.Commands.add('getInfoToast', () => cy.get('div[role=alert].alert.alert-info'));
-Cypress.Commands.add('cy.getDangerToast', () => cy.get('div[role=alert].alert.alert-danger'));
+Cypress.Commands.add('getDangerToast', () => cy.get('div[role=alert].alert.alert-danger'));
 
 declare global {
   namespace Cypress {
