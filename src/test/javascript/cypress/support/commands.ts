@@ -51,7 +51,8 @@ Cypress.Commands.add(
             bearer: auth
           }
         }).then(response => {
-          response.body.forEach(user => {
+          // TODO: replace any by correct type
+          response.body.forEach((user: any) => {
             if (user.login === login) {
               cy.request({
                 method: 'PUT',
@@ -85,7 +86,8 @@ Cypress.Commands.add('cleanUsers', () => {
         bearer: auth
       }
     }).then(response => {
-      response.body.forEach(user => {
+      // TODO: replace any by correct type
+      response.body.forEach((user: any) => {
         if (!['user', 'admin', 'system'].includes(user.login)) {
           cy.request({
             method: 'DELETE',
@@ -100,3 +102,19 @@ Cypress.Commands.add('cleanUsers', () => {
   });
   cy.logout();
 });
+
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      logout(): void;
+      loginUsing(username: string, password: string): Cypress.Chainable;
+      loginWithAdmin(): Cypress.Chainable;
+      registerUserUsing(login: string, email: string, password: string): Cypress.Chainable;
+      createAndActivateUserUsing(login: string, email: string, password: string, firstName?: string, lastName?: string): Cypress.Chainable;
+      cleanUsers(): void;
+    }
+  }
+}
+
+// Convert this to a module instead of script (allows import/export)
+export {};

@@ -20,3 +20,15 @@ Cypress.Commands.add('clickOnLoginItem', () => {
     .find(loginSelector)
     .click();
 });
+
+declare global {
+  namespace Cypress {
+    interface Chainable<Subject> {
+      clickOnLoginItem(): Cypress.Chainable;
+      clickOnAdminMenuItem(): Cypress.Chainable;
+    }
+  }
+}
+
+// Convert this to a module instead of script (allows import/export)
+export {};
