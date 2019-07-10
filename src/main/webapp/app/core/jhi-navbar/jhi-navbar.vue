@@ -21,11 +21,16 @@
                     id="entity-menu"
                     v-if="authenticated"
                     :class="{'router-link-active': subIsActive('/entity')}"
-                    active-class="active" class="pointer">
+                    active-class="active" class="pointer"
+                    data-e2e-element="entity-menu">
                     <span slot="button-content" class="navbar-dropdown-menu">
                         <font-awesome-icon icon="th-list" />
                         <span v-text="$t('global.menu.entities.main')">Entities</span>
                     </span>
+                    <b-dropdown-item to="/entity/post">
+                        <font-awesome-icon icon="asterisk" />
+                        <span v-text="$t('global.menu.entities.post')">Post</span>
+                    </b-dropdown-item>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </b-nav-item-dropdown>
                 <b-nav-item-dropdown

@@ -3,3 +3,4 @@ import './authentication';
 import './navbar';
 import './utils';
 import './users';
+import './entities';

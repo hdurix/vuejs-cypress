@@ -24,6 +24,12 @@ const JhiLogsComponent = () => import('../admin/logs/logs.vue');
 const JhiAuditsComponent = () => import('../admin/audits/audits.vue');
 const JhiMetricsComponent = () => import('../admin/metrics/metrics.vue');
 /* tslint:disable */
+// prettier-ignore
+const Post = () => import('../entities/post/post.vue');
+// prettier-ignore
+const PostUpdate = () => import('../entities/post/post-update.vue');
+// prettier-ignore
+const PostDetails = () => import('../entities/post/post-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 Vue.use(Router);
@@ -140,6 +146,31 @@ export default new Router({
       name: 'JhiConfigurationComponent',
       component: JhiConfigurationComponent,
       meta: { authorities: ['ROLE_ADMIN'] }
+    }
+    ,
+    {
+      path: '/entity/post',
+      name: 'Post',
+      component: Post,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/post/new',
+      name: 'PostCreate',
+      component: PostUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/post/:postId/edit',
+      name: 'PostEdit',
+      component: PostUpdate,
+      meta: { authorities: ['ROLE_USER'] }
+    },
+    {
+      path: '/entity/post/:postId/view',
+      name: 'PostView',
+      component: PostDetails,
+      meta: { authorities: ['ROLE_USER'] }
     }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
   ]
