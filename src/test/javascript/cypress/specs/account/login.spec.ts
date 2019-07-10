@@ -5,7 +5,7 @@ import {
   loginPasswordSelector,
   loginSubmitSelector,
   loginAlertSelector
-} from '../../page-objects/login-page';
+} from '../../support/page-objects/login-page';
 
 describe('Log In', () => {
   beforeEach(() => {

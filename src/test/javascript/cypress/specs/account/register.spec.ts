@@ -7,9 +7,7 @@ import {
   registerSubmitSelector,
   registerTitleSelector,
   registerUsernameSelector
-} from '../../page-objects/register-page';
-
-import { getDangerToast, getSuccessToast } from '../../util/utils';
+} from '../../support/page-objects/register-page';
 
 describe('Register', () => {
   beforeEach(() => {
@@ -35,7 +33,7 @@ describe('Register', () => {
     autoSignUpUsing('user_test', 'admin@localhost.jh', 'user_test');
 
     // THEN
-    getSuccessToast().should('exist');
+    cy.getSuccessToast().should('exist');
   });
 
   // TODO: test input required + password match
@@ -47,7 +45,7 @@ describe('Register', () => {
     autoSignUpUsing('user-login-taken', 'user-login-taken@localhost.jh', 'user-login-taken');
 
     // THEN
-    getDangerToast().should('exist');
+    cy.getDangerToast().should('exist');
   });
 
   it('should not be able to sign up if email already taken', () => {
@@ -58,6 +56,6 @@ describe('Register', () => {
     autoSignUpUsing('user-email-taken', 'user-email-taken@localhost.jh', 'user-email-taken');
 
     // THEN
-    getDangerToast().should('exist');
+    cy.getDangerToast().should('exist');
   });
 });

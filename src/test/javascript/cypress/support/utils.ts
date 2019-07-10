@@ -1,3 +1,4 @@
+// Maybe add chai assertion instead
 Cypress.Commands.add(
   'shouldTextBe',
   {
@@ -11,62 +12,18 @@ Cypress.Commands.add(
   }
 );
 
-// /**
-//  * Example that shows how to write a custom Chai assertion.
-//  *
-//  * @see https://www.chaijs.com/guide/helpers/
-//  * @example
-//  ```
-//  expect('foo').to.be.foo()
-//  expect('bar').to.not.be.foo()
-//  cy.wrap('foo').should('be.foo')
-//  cy.wrap('bar').should('not.be.foo')
-//  ```
-//  * */
-// const isTextEqualTo = (_chai: any) => {
-//   function assertTextEqual (this: any, text: string) {
-//     this.assert(
-//         this._obj === text,
-//         'expected #{this} to be #{exp} but got #{act}',
-//         'expected #{this} to not be #{act}',
-//         this._obj
-//     )
-//   }
-//
-//   _chai.Assertion.addMethod('isTextEqualTo', assertTextEqual);
-// };
-// // registers our assertion function "isFoo" with Chai
-// chai.use(isTextEqualTo);
+Cypress.Commands.add('getSuccessToast', () => cy.get('div[role=alert].alert.alert-success'));
+Cypress.Commands.add('getInfoToast', () => cy.get('div[role=alert].alert.alert-info'));
+Cypress.Commands.add('cy.getDangerToast', () => cy.get('div[role=alert].alert.alert-danger'));
 
 declare global {
   namespace Cypress {
     interface Chainable<Subject> {
       shouldTextBe(text: string): Cypress.Chainable;
+      getSuccessToast(): Cypress.Chainable;
+      getInfoToast(): Cypress.Chainable;
+      getDangerToast(): Cypress.Chainable;
     }
-
-    // interface Chainer<Subject> {
-    //   /**
-    //    * Custom Chai assertion that checks if given subject is string text
-    //    *
-    //    * @example
-    //    ```
-    //    expect('foo').to.be.foo()
-    //    cy.wrap('foo').should('be.foo')
-    //    ```
-    //    * */
-    //   (chainer: 'haveText'): Chainable<Subject>
-    //
-    //   /**
-    //    * Custom Chai assertion that checks if given subject is NOT string "foo"
-    //    *
-    //    * @example
-    //    ```
-    //    expect('bar').to.not.be.foo()
-    //    cy.wrap('bar').should('not.be.foo')
-    //    ```
-    //    * */
-    //   (chainer: 'not.be.foo'): Chainable<Subject>
-    // }
   }
 }
 

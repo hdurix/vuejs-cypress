@@ -4,9 +4,7 @@ import {
   settingsLastNameSelector,
   settingsPageSelector,
   settingsSubmitSelector
-} from '../../page-objects/settings-page';
-
-import { getSuccessToast, getDangerToast } from '../../util/utils';
+} from '../../support/page-objects/settings-page';
 
 describe('Account Management', () => {
   beforeEach(() => {
@@ -42,7 +40,7 @@ describe('Account Management', () => {
       .click();
 
     // THEN
-    getSuccessToast().should('exist');
+    cy.getSuccessToast().should('exist');
   });
 
   it('should not be able to change user settings if email already exists', () => {
@@ -68,6 +66,6 @@ describe('Account Management', () => {
       .click();
 
     // THEN
-    getDangerToast().should('exist');
+    cy.getDangerToast().should('exist');
   });
 });

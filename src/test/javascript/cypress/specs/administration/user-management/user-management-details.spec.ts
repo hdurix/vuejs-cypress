@@ -2,7 +2,7 @@ import {
   getUserDetailsButtonByLogin,
   userDetailsLoginSelector,
   userDetailsPageSelector
-} from '../../../page-objects/user-managements-pages';
+} from '../../../support/page-objects/user-managements-pages';
 
 describe('User Details', () => {
   beforeEach(() => {

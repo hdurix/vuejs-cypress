@@ -2,9 +2,7 @@ import {
   getUserDeactivatedButtonByLogin,
   getUserDeleteButtonByLogin,
   userDeleteModalPageSelector
-} from '../../../page-objects/user-managements-pages';
-
-import { getDangerToast } from '../../../util/utils';
+} from '../../../support/page-objects/user-managements-pages';
 
 describe('User Management', () => {
   beforeEach(() => {
@@ -41,6 +39,6 @@ describe('User Management', () => {
 
     // THEN
     cy.get(userDeleteModalPageSelector).should('not.be.visible');
-    getDangerToast().should('exist');
+    cy.getDangerToast().should('exist');
   });
 });

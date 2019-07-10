@@ -4,9 +4,7 @@ import {
   userEditEmailSelector,
   userEditPageSelector,
   userEditSaveSelector
-} from '../../../page-objects/user-managements-pages';
-
-import { getInfoToast } from '../../../util/utils';
+} from '../../../support/page-objects/user-managements-pages';
 
 describe('User Edit', () => {
   beforeEach(() => {
@@ -30,7 +28,7 @@ describe('User Edit', () => {
       .click();
 
     // THEN
-    getInfoToast().should('exist');
+    cy.getInfoToast().should('exist');
     getUserEmailByLogin('user-edit-details').shouldTextBe('user-edit-details@localhost.jhipster');
   });
 });

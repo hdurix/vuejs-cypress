@@ -1,6 +1,4 @@
-import { autoChangePassword } from '../../page-objects/password-page';
-
-import { getDangerToast, getSuccessToast } from '../../util/utils';
+import { autoChangePassword } from '../../support/page-objects/password-page';
 
 describe('Account Management', () => {
   beforeEach(() => {
@@ -20,7 +18,7 @@ describe('Account Management', () => {
     autoChangePassword('bad-password', 'new_password', 'new_password');
 
     // THEN
-    getDangerToast().should('exist');
+    cy.getDangerToast().should('exist');
   });
 
   it('should be able to update password', () => {
@@ -33,7 +31,7 @@ describe('Account Management', () => {
     autoChangePassword('user-change-password', 'new_password', 'new_password');
 
     // THEN
-    getSuccessToast().should('exist');
+    cy.getSuccessToast().should('exist');
     cy.logout();
 
     // Should be able to login with updated password
