@@ -15,8 +15,10 @@ describe('User Details', () => {
   });
 
   it('should preview details from user', () => {
+    // WHEN
     getUserDetailsButtonByLogin('user-details').click();
 
+    // THEN
     cy.get(userDetailsPageSelector)
       .find(userDetailsLoginSelector)
       .shouldTextBe('user-details');

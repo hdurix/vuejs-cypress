@@ -16,12 +16,10 @@ describe('Register', () => {
     cy.cleanUsers();
     // TODO: Move logout to support ? It would run before each test
     cy.logout();
-    cy.visit('/');
+    cy.visit('/register');
   });
 
   it('should display register page', () => {
-    cy.visit('/register');
-
     cy.get(registerPageSelector).find(registerTitleSelector);
     cy.get(registerPageSelector).find(registerUsernameSelector);
     cy.get(registerPageSelector).find(registerEmailSelector);
@@ -31,30 +29,35 @@ describe('Register', () => {
   });
 
   it('should be able to sign up', () => {
-    cy.visit('/register');
+    // GIVEN
+
+    // WHEN
     autoSignUpUsing('user_test', 'admin@localhost.jh', 'user_test');
 
+    // THEN
     getSuccessToast().should('exist');
   });
 
   // TODO: test input required + password match
 
   it('should not be able to sign up if login already taken', () => {
+    // GIVEN
     cy.createAndActivateUserUsing('user-login-taken', 'user-login-taken@localhost.jh', 'user-login-taken');
 
-    cy.visit('/register');
     autoSignUpUsing('user-login-taken', 'user-login-taken@localhost.jh', 'user-login-taken');
 
-    // Error toast should appear
+    // THEN
     getDangerToast().should('exist');
   });
 
   it('should not be able to sign up if email already taken', () => {
+    // GIVEN
     cy.createAndActivateUserUsing('user-email-taken', 'user-email-taken@localhost.jh', 'user-email-taken');
-    cy.visit('/register');
+
+    // WHEN
     autoSignUpUsing('user-email-taken', 'user-email-taken@localhost.jh', 'user-email-taken');
 
-    // Error toast should appear
+    // THEN
     getDangerToast().should('exist');
   });
 });

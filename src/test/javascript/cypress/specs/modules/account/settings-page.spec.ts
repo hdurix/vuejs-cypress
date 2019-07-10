@@ -17,6 +17,7 @@ describe('Account Management', () => {
   });
 
   it('should be able to change user_test settings', () => {
+    // GIVEN
     cy.createAndActivateUserUsing(
       'user-change-settings',
       'user-change-settings@localhost.jh',
@@ -27,6 +28,7 @@ describe('Account Management', () => {
     cy.loginUsing('user-change-settings', 'user-change-settings');
     cy.visit('/account/settings');
 
+    // WHEN
     cy.get(settingsPageSelector)
       .find(settingsFirstNameSelector)
       .clear()
@@ -39,11 +41,12 @@ describe('Account Management', () => {
       .find(settingsSubmitSelector)
       .click();
 
-    // Error toast should appear
+    // THEN
     getSuccessToast().should('exist');
   });
 
   it('should not be able to change user settings if email already exists', () => {
+    // GIVEN
     cy.createAndActivateUserUsing(
       'user-fail-change-settings1',
       'user-fail-change-settings1@localhost.jh',
@@ -55,6 +58,7 @@ describe('Account Management', () => {
     cy.loginUsing('user-fail-change-settings1', 'user-fail-change-settings1');
     cy.visit('/account/settings');
 
+    // WHEN
     cy.get(settingsPageSelector)
       .find(settingsEmailSelector)
       .clear()
@@ -63,7 +67,7 @@ describe('Account Management', () => {
       .find(settingsSubmitSelector)
       .click();
 
-    // Error toast should appear
+    // THEN
     getDangerToast().should('exist');
   });
 });

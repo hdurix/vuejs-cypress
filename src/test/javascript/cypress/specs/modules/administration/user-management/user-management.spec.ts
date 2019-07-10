@@ -16,28 +16,31 @@ describe('User Management', () => {
   });
 
   it('should be able to activate deactivated user', () => {
+    // GIVEN
     cy.registerUserUsing('user-deactivated', 'user-deactivated@localhost.jh', 'user-deactivated');
     cy.reload();
+
+    // WHEN
     getUserDeactivatedButtonByLogin('user-deactivated').click();
 
-    // Deactivated button should disappear
+    // THEN
     getUserDeactivatedButtonByLogin('user-deactivated').should('not.exist');
   });
 
   it('should be able to delete existing user', () => {
+    // GIVEN
     cy.registerUserUsing('user-to-delete', 'user-to-delete@localhost.jh', 'user-to-delete');
     cy.reload();
 
+    // WHEN
     getUserDeleteButtonByLogin('user-to-delete').click();
     cy.get(userDeleteModalPageSelector)
       .find('button')
       .contains('OK')
       .click();
 
-    // Delete modal should disappear
+    // THEN
     cy.get(userDeleteModalPageSelector).should('not.be.visible');
-
-    // Danger toast should appear
     getDangerToast().should('exist');
   });
 });

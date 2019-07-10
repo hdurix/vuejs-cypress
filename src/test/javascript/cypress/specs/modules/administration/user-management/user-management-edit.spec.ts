@@ -19,6 +19,7 @@ describe('User Edit', () => {
   });
 
   it('should edit details from user', () => {
+    // WHEN
     getUserEditButtonByLogin('user-edit-details').click();
 
     cy.get(userEditPageSelector)
@@ -28,9 +29,8 @@ describe('User Edit', () => {
       .find(userEditSaveSelector)
       .click();
 
-    // Info toast should appear
+    // THEN
     getInfoToast().should('exist');
-
     getUserEmailByLogin('user-edit-details').shouldTextBe('user-edit-details@localhost.jhipster');
   });
 });
