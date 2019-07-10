@@ -1,4 +1,5 @@
 import 'cypress-file-upload';
-import './commands';
+import './authentication';
 import './navbar';
 import './utils';
+import './users';
