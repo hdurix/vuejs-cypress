@@ -25,7 +25,7 @@ declare global {
   namespace Cypress {
     interface Chainable<Subject> {
       clickOnLoginItem(): Cypress.Chainable;
-      clickOnAdminMenuItem(): Cypress.Chainable;
+      clickOnAdminMenuItem(item: string): Cypress.Chainable;
     }
   }
 }

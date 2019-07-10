@@ -29,7 +29,7 @@
                     <th></th>
                 </tr>
                 </thead>
-                <tbody v-if ="users">
+                <tbody v-if ="users" data-e2e-container="users-table-body">
                     <tr v-for="user of orderBy(users, propOrder, reverse === true ? 1 : -1)" :key="user.id" :id="user.login">
                         <td><router-link tag="a" :to="{name: 'JhiUserView', params: {userId: user.login}}">{{user.id}}</router-link></td>
                         <td>{{user.login}}</td>
@@ -72,7 +72,7 @@
                     </tr>
                 </tbody>
             </table>
-            <b-modal ref="removeUser" id="removeUser" title="Confirm delete operation" v-bind:title="$t('entity.delete.title')" @ok="deleteUser()">
+            <b-modal ref="removeUser" id="removeUser" title="Confirm delete operation" v-bind:title="$t('entity.delete.title')" @ok="deleteUser()" data-e2e-container="user-delete-modal">
                 <div class="modal-body">
                     <p id="jhi-delete-user-heading" v-text="$t('userManagement.delete.question', { 'login': removeId})">Are you sure you want to delete this user?</p>
                 </div>

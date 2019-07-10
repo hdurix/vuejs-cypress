@@ -1,11 +1,13 @@
-describe('Log In', () => {
-  const loginModalSelector = '[data-e2e-container=login-modal]';
-  const loginTitleSelector = '[data-e2e-element=title]';
-  const loginUsernameSelector = '[data-e2e-element=username]';
-  const loginPasswordSelector = '[data-e2e-element=password]';
-  const loginSubmitSelector = '[data-e2e-element=submit]';
-  const loginAlertSelector = '[data-e2e-element=alert-authentication-error]';
+import {
+  loginModalSelector,
+  loginTitleSelector,
+  loginUsernameSelector,
+  loginPasswordSelector,
+  loginSubmitSelector,
+  loginAlertSelector
+} from '../../page-objects/login-page';
 
+describe('Log In', () => {
   beforeEach(() => {
     cy.logout();
     cy.visit('/');
