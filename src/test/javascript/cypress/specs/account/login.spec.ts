@@ -7,6 +7,19 @@ import {
   loginAlertSelector
 } from '../../support/page-objects/login-page';
 
+// should be in login-page.ts?
+const loginWith = (username: string, password: string) => {
+  cy.get(loginModalSelector)
+    .find(loginUsernameSelector)
+    .type(username);
+  cy.get(loginModalSelector)
+    .find(loginPasswordSelector)
+    .type(password);
+  cy.get(loginModalSelector)
+    .find(loginSubmitSelector)
+    .click();
+};
+
 describe('Log In', () => {
   beforeEach(() => {
     cy.logout();
@@ -24,40 +37,27 @@ describe('Log In', () => {
   });
 
   it('should fail to login with bad password', () => {
-    cy.get(loginModalSelector)
-      .find(loginUsernameSelector)
-      .type('admin');
-    cy.get(loginModalSelector)
-      .find(loginPasswordSelector)
-      .type('foo');
+    // WHEN
+    loginWith('admin', 'wrong');
 
-    cy.get(loginModalSelector)
-      .find(loginSubmitSelector)
-      .click();
+    // THEN
     cy.get(loginModalSelector)
       .find(loginTitleSelector)
       .should('exist');
-    cy.get(loginModalSelector)
-      .find(loginAlertSelector)
-      .should('exist');
+    // Not so useful as already tested after
+    // cy.get(loginModalSelector)
+    //   .find(loginAlertSelector)
+    //   .should('exist');
     cy.get(loginModalSelector)
       .find(loginAlertSelector)
       .should('have.class', 'alert-danger');
   });
 
   it('should login with admin account', () => {
-    cy.get(loginModalSelector)
-      .find(loginUsernameSelector)
-      .clear()
-      .type('admin');
-    cy.get(loginModalSelector)
-      .find(loginPasswordSelector)
-      .clear()
-      .type('admin');
-    cy.get(loginModalSelector)
-      .find(loginSubmitSelector)
-      .click();
+    // WHEN
+    loginWith('admin', 'admin');
 
+    // THEN
     cy.get(loginModalSelector)
       .find(loginTitleSelector)
       .should('not.exist');

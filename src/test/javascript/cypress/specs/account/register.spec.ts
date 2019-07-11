@@ -27,8 +27,6 @@ describe('Register', () => {
   });
 
   it('should be able to sign up', () => {
-    // GIVEN
-
     // WHEN
     autoSignUpUsing('user_test', 'admin@localhost.jh', 'user_test');
 

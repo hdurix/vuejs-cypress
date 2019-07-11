@@ -25,21 +25,23 @@ describe('Post e2e test', () => {
 
   beforeEach(() => {
     cy.logout();
-    cy.loginWithAdmin();
+    cy.loginWithAdmin().then(() => {
+      // COULD BE IN A NAMED FUNCTION
 
-    // TODO: Check navgation in navbar
-    cy.visit('/entity/post');
-    cy.request({
-      method: 'GET',
-      url: '/api/posts',
-      auth: {
-        bearer: window.sessionStorage.getItem('jhi-authenticationToken')
-      }
-    })
-      .its('body')
-      .then(entities => {
-        startingEntitiesCount = entities.length;
-      });
+      // TODO: Check navgation in navbar
+      cy.visit('/entity/post');
+      cy.request({
+        method: 'GET',
+        url: '/api/posts',
+        auth: {
+          bearer: window.sessionStorage.getItem('jhi-authenticationToken')
+        }
+      })
+        .its('body')
+        .then(entities => {
+          startingEntitiesCount = entities.length;
+        });
+    });
   });
 
   it('should load Posts', () => {
