@@ -1,8 +1,8 @@
-const navbarSelector = '[data-e2e-container=navbar]';
-const adminMenuSelector = '[data-e2e-element=admin-menu]';
-const accountMenuSelector = '[data-e2e-element=account-menu]';
-const loginSelector = '[data-e2e-element=login]';
-const entityMenuSelector = '[data-e2e-element=entity-menu]';
+export const navbarSelector = '[data-e2e-container=navbar]';
+export const adminMenuSelector = '[data-e2e-element=admin-menu]';
+export const accountMenuSelector = '[data-e2e-element=account-menu]';
+export const loginSelector = '[data-e2e-element=login]';
+export const entityMenuSelector = '[data-e2e-element=entity-menu]';
 
 Cypress.Commands.add('clickOnAdminMenuItem', (item: string) => {
   return cy
