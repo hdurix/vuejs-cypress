@@ -44,18 +44,27 @@
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <router-link :to="{name: 'PostView', params: {postId: post.id}}" tag="button" class="btn btn-info btn-sm details">
+                            <router-link
+                                    :to="{name: 'PostView', params: {postId: post.id}}"
+                                    tag="button"
+                                    class="btn btn-info btn-sm details"
+                                    data-e2e-element="details-button">
                                 <font-awesome-icon icon="eye"></font-awesome-icon>
                                 <span class="d-none d-md-inline" v-text="$t('entity.action.view')">View</span>
                             </router-link>
-                            <router-link :to="{name: 'PostEdit', params: {postId: post.id}}"  tag="button" class="btn btn-primary btn-sm edit">
+                            <router-link
+                                    :to="{name: 'PostEdit', params: {postId: post.id}}"
+                                    tag="button"
+                                    class="btn btn-primary btn-sm edit"
+                                    data-e2e-element="edit-button">
                                 <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
                                 <span class="d-none d-md-inline" v-text="$t('entity.action.edit')">Edit</span>
                             </router-link>
                             <b-button v-on:click="prepareRemove(post)"
                                    variant="danger"
                                    class="btn btn-sm"
-                                   v-b-modal.removeEntity>
+                                   v-b-modal.removeEntity
+                                   data-e2e-element="delete-button">
                                 <font-awesome-icon icon="times"></font-awesome-icon>
                                 <span class="d-none d-md-inline" v-text="$t('entity.action.delete')">Delete</span>
                             </b-button>

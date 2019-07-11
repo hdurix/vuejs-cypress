@@ -8,13 +8,13 @@
                         <span v-text="$t('vueApp.post.name')">Name</span>
                     </dt>
                     <dd>
-                        <span>{{post.name}}</span>
+                        <span data-e2e-element="details-item">{{post.name}}</span>
                     </dd>
                     <dt>
                         <span v-text="$t('vueApp.post.age')">Age</span>
                     </dt>
                     <dd>
-                        <span>{{post.age}}</span>
+                        <span data-e2e-element="details-item">{{post.age}}</span>
                     </dd>
                     <dt>
                         <span v-text="$t('vueApp.post.user')">User</span>

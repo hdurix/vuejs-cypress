@@ -1,38 +1,34 @@
-// TODO: get rid of the 2 imports
-import PostComponentsPage from './post.page-object';
-import PostDetailsPage from './post-details.page-object';
-
 import {
   postCreateSelector,
+  postDeleteButtonSelector,
   postDeleteConfirmSelector,
   postDeleteModalSelector,
   postDeleteTitleSelector,
   postDetailsBackSelector,
+  postDetailsButtonSelector,
+  postDetailsItemSelector,
   postDetailsPageSelector,
   postDetailsTitleSelector,
   postEditAgeSelector,
+  postEditButtonSelector,
   postEditNameSelector,
   postEditPageSelector,
   postEditSaveSelector,
   postEditTitleSelector,
   postPageSelector,
   postTitleSelector
-} from '../../../support/page-objects/entities/post-page';
+} from '../../support/page-objects/entities/post-page';
 
 describe('Post e2e test', () => {
   let startingEntitiesCount = 0;
   let entityToDelete: number[] = [];
 
   beforeEach(() => {
-    // TODO: clarify login
     cy.logout();
     cy.loginWithAdmin();
-    cy.cleanEntity('posts', entityToDelete);
-    entityToDelete = [];
-    cy.loginWithAdmin();
-    // Check navgation in navbar
+
+    // TODO: Check navgation in navbar
     cy.visit('/entity/post');
-    cy.loginWithAdmin();
     cy.request({
       method: 'GET',
       url: '/api/posts',
@@ -51,10 +47,14 @@ describe('Post e2e test', () => {
 
     if (startingEntitiesCount === 0) {
       // TODO: test if message? stub response?
-      PostComponentsPage.getDeleteButtons().should('not.exist');
+      cy.get(postPageSelector)
+        .find(postDeleteButtonSelector)
+        .should('not.exist');
     } else {
       // TODO: handle pagination?
-      PostComponentsPage.getDeleteButtons().should('have.lengthOf', startingEntitiesCount);
+      cy.get(postPageSelector)
+        .find(postDeleteButtonSelector)
+        .should('have.lengthOf', startingEntitiesCount);
     }
   });
 
@@ -131,11 +131,13 @@ describe('Post e2e test', () => {
         id: 3
       }
     }).then(response => {
-      // @ts-ignore
       entityToDelete.push(response.body.id);
     });
     cy.reload();
-    PostComponentsPage.clickOnLastDetailsButton();
+    cy.get(postPageSelector)
+      .find(postDetailsButtonSelector)
+      .last()
+      .click();
 
     cy.get(postDetailsPageSelector)
       .find(postDetailsTitleSelector)
@@ -145,7 +147,9 @@ describe('Post e2e test', () => {
       .find(postDetailsBackSelector)
       .should('exist');
 
-    PostDetailsPage.getFirstDetail()
+    cy.get(postDetailsPageSelector)
+      .find(postDetailsItemSelector)
+      .first()
       .invoke('text')
       .should('not.have.lengthOf', 0);
 
@@ -174,12 +178,14 @@ describe('Post e2e test', () => {
         id: 3
       }
     }).then(response => {
-      // @ts-ignore
       entityToDelete.push(response.body.id);
     });
     cy.reload();
 
-    PostComponentsPage.clickOnLastEditButton();
+    cy.get(postPageSelector)
+      .find(postEditButtonSelector)
+      .last()
+      .click();
 
     cy.get(postEditPageSelector)
       .find(postEditSaveSelector)
@@ -219,15 +225,20 @@ describe('Post e2e test', () => {
       user: {
         id: 3
       }
-    }).then(post => {
-      // @ts-ignore
-      entityToDelete.push(post.id);
+    }).then(response => {
+      entityToDelete.push(response.body.id);
     });
     cy.reload();
-    PostComponentsPage.clickOnLastDeleteButton();
 
-    // cy.get(postDeleteModalSelector).should('be.visible');
+    cy.get(postPageSelector)
+      .find(postDeleteButtonSelector)
+      .last()
+      .click();
 
+    cy.get(postDeleteModalSelector)
+      .find(postDeleteTitleSelector)
+      .should('be.visible');
+    // cy.get(".lkahlezj");
     cy.get(postDeleteModalSelector)
       .find(postDeleteTitleSelector)
       .invoke('attr', 'id')
@@ -238,7 +249,9 @@ describe('Post e2e test', () => {
       .click();
 
     // Delete modal should disappear
-    // cy.get(postDeleteModalSelector).should('not.be.visible');
+    cy.get(postDeleteModalSelector)
+      .find(postDeleteTitleSelector)
+      .should('not.be.visible');
 
     cy.request({
       method: 'GET',
@@ -250,9 +263,15 @@ describe('Post e2e test', () => {
       .its('body')
       .then(entities => {
         expect(entities.length).to.equal(startingEntitiesCount);
+        entityToDelete = [];
       });
 
     // Danger toast should appear
     cy.getDangerToast().should('exist');
+  });
+
+  afterEach(() => {
+    cy.cleanEntity('posts', entityToDelete);
+    entityToDelete = [];
   });
 });
